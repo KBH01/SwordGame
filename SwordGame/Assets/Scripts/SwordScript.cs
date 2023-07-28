@@ -14,6 +14,8 @@ public class SwordScript : MonoBehaviour
     [SerializeField] private Transform right;
     [SerializeField] private Transform top;
     [SerializeField] private Transform bottom;
+
+    private uint swordState;
     
     void Update()
     {
@@ -29,27 +31,32 @@ public class SwordScript : MonoBehaviour
             if (mouseY > Line1(mouseX) && mouseY > Line2(mouseX))
             {
                 transform.SetPositionAndRotation(top.position, top.rotation);
+                swordState = 3;
             }
 
             else if (mouseY < Line1(mouseX) && mouseY < Line2(mouseX))
             {
                 transform.SetPositionAndRotation(bottom.position, bottom.rotation);
+                swordState = 4;
             }
 
             if (mouseY > Line1(mouseX) && mouseY < Line2(mouseX))
             {
                 transform.SetPositionAndRotation(left.position, left.rotation);
+                swordState = 1;
             }
 
             else if (mouseY < Line1(mouseX) && mouseY > Line2(mouseX))
             {
                 transform.SetPositionAndRotation(right.position, right.rotation);
+                swordState = 2;
             }
         }
 
         else
         {
             transform.SetPositionAndRotation(idle.position, idle.rotation);
+            swordState = 0;
         }
 
     }
