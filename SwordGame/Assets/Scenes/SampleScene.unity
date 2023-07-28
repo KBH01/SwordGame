@@ -403,6 +403,7 @@ MonoBehaviour:
   right: {fileID: 15450245}
   top: {fileID: 1070412691}
   bottom: {fileID: 392592526}
+  changeSpeed: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,12 +628,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a3d5fd67847264aae8193b200892b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 50
+  sensitivity: 100
   idle: {fileID: 2127862482}
   left: {fileID: 1517422343}
   right: {fileID: 15450245}
   top: {fileID: 1070412691}
   bottom: {fileID: 392592526}
+  changeSpeed: 50
 --- !u!1 &1488592044
 GameObject:
   m_ObjectHideFlags: 0

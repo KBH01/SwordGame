@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,48 +16,53 @@ public class SwordScript : MonoBehaviour
     [SerializeField] private Transform top;
     [SerializeField] private Transform bottom;
 
-    private uint swordState;
+    [SerializeField] private float changeSpeed;
+
+    private Transform current;
+    private Transform previous;
+    
+    private float lerpAmount = 0.0f;
+
+    void Awake()
+    {
+        current = idle;
+        previous = idle;
+    }
     
     void Update()
     {
-        resolutionRatio = (float)Screen.height / (float)Screen.width;
+        lerpAmount += Mathf.Pow(changeSpeed * Time.deltaTime, 2f);
+        
         float mouseX = Input.mousePosition.x;
         float mouseY = Input.mousePosition.y;
-        
-        Debug.Log(Screen.width + ", " + Screen.height + ", " + resolutionRatio);
 
         if (Vector2.Distance(new Vector2(Screen.width * 0.5f, Screen.height * 0.5f), new Vector2(mouseX, mouseY)) > sensitivity)
         {
 
             if (mouseY > Line1(mouseX) && mouseY > Line2(mouseX))
             {
-                transform.SetPositionAndRotation(top.position, top.rotation);
-                swordState = 3;
+                AnimateSword(top);
             }
 
             else if (mouseY < Line1(mouseX) && mouseY < Line2(mouseX))
             {
-                transform.SetPositionAndRotation(bottom.position, bottom.rotation);
-                swordState = 4;
+                AnimateSword(bottom);
             }
 
             if (mouseY > Line1(mouseX) && mouseY < Line2(mouseX))
             {
-                transform.SetPositionAndRotation(left.position, left.rotation);
-                swordState = 1;
+                AnimateSword(left);
             }
 
             else if (mouseY < Line1(mouseX) && mouseY > Line2(mouseX))
             {
-                transform.SetPositionAndRotation(right.position, right.rotation);
-                swordState = 2;
+                AnimateSword(right);
             }
         }
 
         else
         {
-            transform.SetPositionAndRotation(idle.position, idle.rotation);
-            swordState = 0;
+            AnimateSword(idle);
         }
 
     }
@@ -78,5 +84,18 @@ public class SwordScript : MonoBehaviour
         y = -x + (Screen.width - (0.5f * Screen.width - 0.5f * Screen.height));
 
         return y;
+    }
+
+    void AnimateSword(Transform position)
+    {
+        if (current != position)
+        {
+            previous = current;
+            lerpAmount = 0;
+            current = position;
+        }
+                
+        transform.position = Vector3.Lerp(previous.position, current.position, lerpAmount);
+        transform.rotation = Quaternion.Slerp(previous.rotation, current.rotation, lerpAmount);
     }
 }
