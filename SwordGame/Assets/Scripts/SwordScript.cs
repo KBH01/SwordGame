@@ -66,7 +66,7 @@ public class SwordScript : MonoBehaviour
     {
         float y = 0;
 
-        y = x * resolutionRatio;
+        y = x - (0.5f * Screen.width - 0.5f * Screen.height);
 
         return y;
     }
@@ -75,7 +75,7 @@ public class SwordScript : MonoBehaviour
     {
         float y = 0;
 
-        y = x * -resolutionRatio + (float)Screen.height;
+        y = -x + (Screen.width - (0.5f * Screen.width - 0.5f * Screen.height));
 
         return y;
     }
