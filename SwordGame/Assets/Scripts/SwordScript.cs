@@ -16,6 +16,20 @@ public class SwordScript : MonoBehaviour
     [SerializeField] private Transform top;
     [SerializeField] private Transform bottom;
 
+    [SerializeField] private GameObject leftWheelo;
+    [SerializeField] private GameObject rightWheelo;
+    [SerializeField] private GameObject topWheelo;
+    [SerializeField] private GameObject bottomWheelo;
+    
+    private SpriteRenderer leftWheelr;
+    private SpriteRenderer rightWheelr;
+    private SpriteRenderer topWheelr;
+    private SpriteRenderer bottomWheelr;
+
+    [SerializeField] private Color selectedColor;
+    [SerializeField] private Color idleColor;
+    [SerializeField] private Color blockColor;
+
     [SerializeField] private float changeSpeed;
 
     private Transform current;
@@ -27,12 +41,16 @@ public class SwordScript : MonoBehaviour
     {
         current = idle;
         previous = idle;
+        leftWheelr = leftWheelo.GetComponent<SpriteRenderer>();
+        rightWheelr = rightWheelo.GetComponent<SpriteRenderer>();
+        topWheelr = topWheelo.GetComponent<SpriteRenderer>();
+        bottomWheelr = bottomWheelo.GetComponent<SpriteRenderer>();
     }
     
     void Update()
     {
-        lerpAmount += Mathf.Pow(changeSpeed * Time.deltaTime, 2f);
-        
+        lerpAmount += changeSpeed * Time.deltaTime;
+
         float mouseX = Input.mousePosition.x;
         float mouseY = Input.mousePosition.y;
 
@@ -42,29 +60,71 @@ public class SwordScript : MonoBehaviour
             if (mouseY > Line1(mouseX) && mouseY > Line2(mouseX))
             {
                 AnimateSword(top);
+                leftWheelr.color = idleColor;
+                rightWheelr.color = idleColor;
+                topWheelr.color = selectedColor;
+                bottomWheelr.color = idleColor;
             }
 
             else if (mouseY < Line1(mouseX) && mouseY < Line2(mouseX))
             {
                 AnimateSword(bottom);
+                leftWheelr.color = idleColor;
+                rightWheelr.color = idleColor;
+                topWheelr.color = idleColor;
+                bottomWheelr.color = selectedColor;
             }
 
             if (mouseY > Line1(mouseX) && mouseY < Line2(mouseX))
             {
                 AnimateSword(left);
+                leftWheelr.color = selectedColor;
+                rightWheelr.color = idleColor;
+                topWheelr.color = idleColor;
+                bottomWheelr.color = idleColor;
             }
 
             else if (mouseY < Line1(mouseX) && mouseY > Line2(mouseX))
             {
                 AnimateSword(right);
+                leftWheelr.color = idleColor;
+                rightWheelr.color = selectedColor;
+                topWheelr.color = idleColor;
+                bottomWheelr.color = idleColor;
             }
         }
 
         else
         {
             AnimateSword(idle);
+            leftWheelr.color = idleColor;
+            rightWheelr.color = idleColor;
+            topWheelr.color = idleColor;
+            bottomWheelr.color = idleColor;
         }
 
+        if (Input.GetMouseButton(1))
+        {
+            if (current == left)
+            {
+                leftWheelr.color = blockColor;
+            }
+            
+            else if (current == right)
+            {
+                rightWheelr.color = blockColor;
+            }
+            
+            else if (current == top)
+            {
+                topWheelr.color = blockColor;
+            }
+            
+            else if (current == bottom)
+            {
+                bottomWheelr.color = blockColor;
+            }
+        }
     }
 
     //these are the lines that split up the screen into areas for the mouse
@@ -85,7 +145,8 @@ public class SwordScript : MonoBehaviour
 
         return y;
     }
-
+    
+    //make the sword smooth
     void AnimateSword(Transform position)
     {
         if (current != position)
@@ -95,7 +156,7 @@ public class SwordScript : MonoBehaviour
             current = position;
         }
                 
-        transform.position = Vector3.Lerp(previous.position, current.position, lerpAmount);
+        transform.position = Vector3.Lerp(previous.position, current.position + new Vector3(0, 0.01f * Mathf.Sin(Time.time * 5f * (0.1f * Mathf.PerlinNoise(0.05f * Time.time, 0f) + 0.9f)), 0), lerpAmount);
         transform.rotation = Quaternion.Slerp(previous.rotation, current.rotation, lerpAmount);
     }
 }
