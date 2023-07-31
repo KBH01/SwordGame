@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
         
         projectileOrientation = (int)Random.Range(0f, 3f);
         Debug.Log(projectileOrientation);
-
+        
         switch (projectileOrientation)
         {
             case 0:
