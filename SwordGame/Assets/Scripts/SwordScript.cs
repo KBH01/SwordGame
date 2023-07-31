@@ -10,11 +10,11 @@ public class SwordScript : MonoBehaviour
     
     [SerializeField] float sensitivity = 0;
     
-    [SerializeField] private Transform idle;
-    [SerializeField] private Transform left;
-    [SerializeField] private Transform right;
-    [SerializeField] private Transform top;
-    [SerializeField] private Transform bottom;
+    [SerializeField] public Transform idle;
+    [SerializeField] public Transform left;
+    [SerializeField] public Transform right;
+    [SerializeField] public Transform top;
+    [SerializeField] public Transform bottom;
 
     [SerializeField] private GameObject leftWheelo;
     [SerializeField] private GameObject rightWheelo;
@@ -37,6 +37,8 @@ public class SwordScript : MonoBehaviour
     
     private float lerpAmount = 0.0f;
 
+    public int swordOrientation = 0;
+    
     void Awake()
     {
         current = idle;
@@ -64,6 +66,7 @@ public class SwordScript : MonoBehaviour
                 rightWheelr.color = idleColor;
                 topWheelr.color = selectedColor;
                 bottomWheelr.color = idleColor;
+                swordOrientation = 3;
             }
 
             else if (mouseY < Line1(mouseX) && mouseY < Line2(mouseX))
@@ -73,6 +76,7 @@ public class SwordScript : MonoBehaviour
                 rightWheelr.color = idleColor;
                 topWheelr.color = idleColor;
                 bottomWheelr.color = selectedColor;
+                swordOrientation = 4;
             }
 
             if (mouseY > Line1(mouseX) && mouseY < Line2(mouseX))
@@ -82,6 +86,7 @@ public class SwordScript : MonoBehaviour
                 rightWheelr.color = idleColor;
                 topWheelr.color = idleColor;
                 bottomWheelr.color = idleColor;
+                swordOrientation = 1;
             }
 
             else if (mouseY < Line1(mouseX) && mouseY > Line2(mouseX))
@@ -91,6 +96,7 @@ public class SwordScript : MonoBehaviour
                 rightWheelr.color = selectedColor;
                 topWheelr.color = idleColor;
                 bottomWheelr.color = idleColor;
+                swordOrientation = 2;
             }
         }
 
@@ -101,6 +107,7 @@ public class SwordScript : MonoBehaviour
             rightWheelr.color = idleColor;
             topWheelr.color = idleColor;
             bottomWheelr.color = idleColor;
+            swordOrientation = 0;
         }
 
         if (Input.GetMouseButton(1))
