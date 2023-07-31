@@ -10,11 +10,11 @@ public class SwordScript : MonoBehaviour
     
     [SerializeField] float sensitivity = 0;
     
-    [SerializeField] public Transform idle;
-    [SerializeField] public Transform left;
-    [SerializeField] public Transform right;
-    [SerializeField] public Transform top;
-    [SerializeField] public Transform bottom;
+    [SerializeField] private Transform idle;
+    [SerializeField] private Transform left;
+    [SerializeField] private Transform right;
+    [SerializeField] private Transform top;
+    [SerializeField] private Transform bottom;
 
     [SerializeField] private GameObject leftWheelo;
     [SerializeField] private GameObject rightWheelo;

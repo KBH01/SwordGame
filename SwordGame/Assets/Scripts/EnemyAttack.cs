@@ -6,7 +6,7 @@ public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private GameObject Projectile;
 
-    [SerializeField] private uint spawnFrequency;
+    [SerializeField] private float spawnFrequency;
 
     void Start()
     {
@@ -15,6 +15,6 @@ public class EnemyAttack : MonoBehaviour
 
     void Attack()
     {
-        Instantiate(Projectile, transform.position, Quaternion.identity);
+        Instantiate(Projectile);
     }
 }

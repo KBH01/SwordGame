@@ -9,36 +9,42 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private float projectileSpeed;
 
-     [SerializeField] GameObject sword;
+    [SerializeField] private Transform left;
+    [SerializeField] private Transform right;
+    [SerializeField] private Transform top;
+    [SerializeField] private Transform bottom;
 
-     private SwordScript swordScript;
+    [SerializeField] public SwordScript swordScript;
 
-    private int projectileOrientation = 0;
+     private int projectileOrientation = 0;
 
-    void OnEnable()
+     void OnEnable()
     {
-        swordScript = sword.GetComponent<SwordScript>();
+        if(name == "Projectile")
+        {
+            return;
+        }
         
-        projectileOrientation = (int)Random.Range(0f, 3f);
+        projectileOrientation = (int)Random.Range(1, 5);
         Debug.Log(projectileOrientation);
 
         switch (projectileOrientation)
         {
-            case 0:
-                transform.position = new Vector3(0, swordScript.left.position.y, swordScript.left.position.z);
-                transform.rotation = swordScript.left.rotation;
-                break;
             case 1:
-                transform.position = new Vector3(0, swordScript.right.position.y, swordScript.right.position.z);
-                transform.rotation = swordScript.right.rotation;
+                transform.position = new Vector3(5, left.position.y, left.position.z);
+                transform.rotation = left.rotation;
                 break;
             case 2:
-                transform.position = new Vector3(0, swordScript.top.position.y, swordScript.top.position.z);
-                transform.rotation = swordScript.top.rotation;
+                transform.position = new Vector3(5, right.position.y, right.position.z);
+                transform.rotation = right.rotation;
                 break;
             case 3:
-                transform.position = new Vector3(0, swordScript.bottom.position.y, swordScript.bottom.position.z);
-                transform.rotation = swordScript.bottom.rotation;
+                transform.position = new Vector3(5, top.position.y, top.position.z);
+                transform.rotation = top.rotation;
+                break;
+            case 4:
+                transform.position = new Vector3(5, bottom.position.y, bottom.position.z);
+                transform.rotation = bottom.rotation;
                 break;
         }
     }
