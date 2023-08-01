@@ -57,7 +57,7 @@ Shader "Hidden/PostPRocessingShader"
             fixed4 frag (v2f i) : SV_Target
             {
                 i.uv *= (_AbsorbIntensity * 0.01) + 1;
-                fixed4 col = tex2D(_MainTex, (i.uv + (Random(i.uv.x * (_Time.x * 2) * i.uv.y) * _DamageIntensity * 0.05)));
+                fixed4 col = tex2D(_MainTex, (i.uv + (Random(i.uv.x * (_Time.x * 2) * i.uv.y) * _DamageIntensity * 0.01)));
                 col += _DamageTint * _DamageIntensity * 2;
                 col += _AbsorbTint * _AbsorbIntensity * 2;
                 return col;
