@@ -10,6 +10,13 @@ public class Player : MonoBehaviour
     
     public float damageIntensity;
 
+    private AudioSource playerAudio;
+
+    void Awake()
+    {
+        playerAudio = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         damageIntensity -= 2f * Time.deltaTime;
@@ -21,5 +28,6 @@ public class Player : MonoBehaviour
     {
         health -= 1;
         damageIntensity = 1;
+        playerAudio.Play();
     }
 }

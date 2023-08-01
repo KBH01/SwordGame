@@ -51,6 +51,8 @@ public class SwordScript : MonoBehaviour
     private ParticleSystem blockAffect;
 
     public uint score;
+
+    private AudioSource swordAudio;
     
     void Awake()
     {
@@ -61,6 +63,7 @@ public class SwordScript : MonoBehaviour
         topWheelr = topWheelo.GetComponent<SpriteRenderer>();
         bottomWheelr = bottomWheelo.GetComponent<SpriteRenderer>();
         blockAffect = GetComponent<ParticleSystem>();
+        swordAudio = GetComponent<AudioSource>();
     }
     
     void Update()
@@ -192,6 +195,7 @@ public class SwordScript : MonoBehaviour
             absorbIntensity = 1;
             blockAffect.Play();
             score += 1;
+            swordAudio.Play();
         }
     }
 }
