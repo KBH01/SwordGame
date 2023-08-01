@@ -62,6 +62,7 @@ Material:
     m_Ints: []
     m_Floats:
 <<<<<<< HEAD
+<<<<<<< HEAD
     - _AbsorbIntensity: 1.479121e-30
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -72,6 +73,12 @@ Material:
     - _Cutoff: 0.5
     - _DamageIntensity: 0.5899064
 >>>>>>> parent of 5c87628 (Added Sound)
+=======
+    - _AbsorbIntensity: 0.3963332
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DamageIntensity: 0
+>>>>>>> parent of 3ab1c88 (push)
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
