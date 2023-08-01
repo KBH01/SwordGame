@@ -3,8 +3,10 @@ Shader "Hidden/PostPRocessingShader"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Tint ("Tint", Color) = (1, 0, 0, 1)
-        _Intensity ("Intensity", float) = 0
+        _DamageTint ("DamageTint", Color) = (1, 0, 0, 1)
+        _AbsorbTint ("AbsorbTint", Color) = (0, 0, 1, 1)
+        _DamageIntensity ("DamageIntensity", float) = 0
+        _AbsorbIntensity ("AbsorbIntensity", float) = 0
     }
     SubShader
     {
@@ -40,8 +42,10 @@ Shader "Hidden/PostPRocessingShader"
             }
 
             sampler2D _MainTex;
-            float _Intensity;
-            fixed4 _Tint;
+            float _DamageIntensity;
+            float _AbsorbIntensity;
+            fixed4 _DamageTint;
+            fixed4 _AbsorbTint;
 
             float2 Random(float seed)
             {
@@ -52,8 +56,10 @@ Shader "Hidden/PostPRocessingShader"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = tex2D(_MainTex, i.uv + Random(i.uv.x * (_Time.x * 2) * i.uv.y) * _Intensity * 0.05);
-                col += _Tint * _Intensity * 2;
+                i.uv *= (_AbsorbIntensity * 0.01) + 1;
+                fixed4 col = tex2D(_MainTex, (i.uv + (Random(i.uv.x * (_Time.x * 2) * i.uv.y) * _DamageIntensity * 0.05)));
+                col += _DamageTint * _DamageIntensity * 2;
+                col += _AbsorbTint * _AbsorbIntensity * 2;
                 return col;
             }
             ENDCG

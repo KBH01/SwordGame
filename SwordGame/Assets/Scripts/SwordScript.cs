@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class SwordScript : MonoBehaviour
 {
@@ -32,12 +34,22 @@ public class SwordScript : MonoBehaviour
 
     [SerializeField] private float changeSpeed;
 
+    [SerializeField] private Material postProcessingMaterial;
+
+    [SerializeField] private TextMeshPro scoreText;
+
     private Transform current;
     private Transform previous;
     
     private float lerpAmount = 0.0f;
 
     public int swordOrientation = 0;
+
+    private float absorbIntensity;
+
+    private ParticleSystem blockAffect;
+
+    public float score;
     
     void Awake()
     {
@@ -47,11 +59,15 @@ public class SwordScript : MonoBehaviour
         rightWheelr = rightWheelo.GetComponent<SpriteRenderer>();
         topWheelr = topWheelo.GetComponent<SpriteRenderer>();
         bottomWheelr = bottomWheelo.GetComponent<SpriteRenderer>();
+        blockAffect = GetComponent<ParticleSystem>();
     }
     
     void Update()
     {
         lerpAmount += changeSpeed * Time.deltaTime;
+        absorbIntensity -= 4f * Time.deltaTime * absorbIntensity;
+        absorbIntensity = Mathf.Clamp(absorbIntensity, 0, 1);
+        postProcessingMaterial.SetFloat("_AbsorbIntensity", absorbIntensity);
 
         float mouseX = Input.mousePosition.x;
         float mouseY = Input.mousePosition.y;
@@ -165,5 +181,11 @@ public class SwordScript : MonoBehaviour
                 
         transform.position = Vector3.Lerp(previous.position, current.position + new Vector3(0, 0.01f * Mathf.Sin(Time.time * 5f * (0.1f * Mathf.PerlinNoise(0.05f * Time.time, 0f) + 0.9f)), 0), lerpAmount);
         transform.rotation = Quaternion.Slerp(previous.rotation, current.rotation, lerpAmount);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        absorbIntensity = 1;
+        blockAffect.Play();
     }
 }

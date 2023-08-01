@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     {
         damageIntensity -= 2f * Time.deltaTime;
         damageIntensity = Mathf.Clamp(damageIntensity, 0, 1);
-        postProcessingMaterial.SetFloat("_Intensity", damageIntensity);
+        postProcessingMaterial.SetFloat("_DamageIntensity", damageIntensity);
     }
     
     private void OnCollisionEnter(Collision other)
