@@ -61,10 +61,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AbsorbIntensity: 0.5903858
+    - _AbsorbIntensity: 0.0128240045
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _DamageIntensity: 0.06051834
+    - _DamageIntensity: 0.5639694
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
