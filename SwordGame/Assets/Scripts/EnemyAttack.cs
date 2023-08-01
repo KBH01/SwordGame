@@ -7,6 +7,10 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private GameObject Projectile;
 
     [SerializeField] private float spawnFrequency;
+    private AudioSource audio;
+    void Awake(){
+        audio = GetComponent<AudioSource>();
+    }
 
     void Start()
     {
@@ -16,5 +20,7 @@ public class EnemyAttack : MonoBehaviour
     void Attack()
     {
         Instantiate(Projectile);
+        audio.Play();
+        
     }
 }

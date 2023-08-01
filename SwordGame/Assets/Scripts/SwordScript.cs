@@ -41,6 +41,9 @@ public class SwordScript : MonoBehaviour
 
     private Transform current;
     private Transform previous;
+
+    private AudioSource audio; 
+    
     
     private float lerpAmount = 0.0f;
 
@@ -61,6 +64,7 @@ public class SwordScript : MonoBehaviour
         topWheelr = topWheelo.GetComponent<SpriteRenderer>();
         bottomWheelr = bottomWheelo.GetComponent<SpriteRenderer>();
         blockAffect = GetComponent<ParticleSystem>();
+        audio = GetComponent<AudioSource>();
     }
     
     void Update()
@@ -189,6 +193,7 @@ public class SwordScript : MonoBehaviour
     {
         absorbIntensity = 1;
         blockAffect.Play();
+        audio.Play();
         score += 1;
     }
 }

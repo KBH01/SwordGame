@@ -17,7 +17,11 @@ public class Projectile : MonoBehaviour
     [SerializeField] public SwordScript swordScript;
 
      private int projectileOrientation = 0;
+     private AudioSource audio; 
 
+    void Awake(){
+        audio = GetComponent<AudioSource>();
+    }
      void OnEnable()
     {
         if(name == "Projectile")
@@ -52,6 +56,7 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         transform.Translate(new Vector3(-projectileSpeed, 0, 0) * Time.deltaTime, Space.World);
+        audio.Play();
     }
 
     private void OnCollisionEnter(Collision other)

@@ -7,8 +7,13 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private uint health;
     [SerializeField] private Material postProcessingMaterial;
+    private AudioSource audio;
     
     public float damageIntensity;
+
+    void Awake(){
+        audio = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -20,6 +25,7 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         health -= 1;
+        audio.Play();
         damageIntensity = 1;
     }
 }
