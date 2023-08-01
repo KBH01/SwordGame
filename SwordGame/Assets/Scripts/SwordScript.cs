@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -49,7 +50,7 @@ public class SwordScript : MonoBehaviour
 
     private ParticleSystem blockAffect;
 
-    public float score;
+    public uint score;
     
     void Awake()
     {
@@ -68,6 +69,7 @@ public class SwordScript : MonoBehaviour
         absorbIntensity -= 4f * Time.deltaTime * absorbIntensity;
         absorbIntensity = Mathf.Clamp(absorbIntensity, 0, 1);
         postProcessingMaterial.SetFloat("_AbsorbIntensity", absorbIntensity);
+        scoreText.text = score.ToString();
 
         float mouseX = Input.mousePosition.x;
         float mouseY = Input.mousePosition.y;
@@ -187,5 +189,6 @@ public class SwordScript : MonoBehaviour
     {
         absorbIntensity = 1;
         blockAffect.Play();
+        score += 1;
     }
 }
