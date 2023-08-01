@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour
 
     [SerializeField] public SwordScript swordScript;
 
-     private int projectileOrientation = 0;
+     public int projectileOrientation = 0;
      private AudioSource audio; 
 
     void Awake(){

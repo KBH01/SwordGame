@@ -191,9 +191,12 @@ public class SwordScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        absorbIntensity = 1;
-        blockAffect.Play();
-        audio.Play();
-        score += 1;
+        if (other.gameObject.GetComponent<Projectile>().projectileOrientation == swordOrientation)
+        {
+            absorbIntensity = 1;
+            blockAffect.Play();
+            audio.Play();
+            score += 1;
+        }
     }
 }
