@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -28,6 +29,8 @@ public class Projectile : MonoBehaviour
         {
             return;
         }
+        
+        Destroy(gameObject, 10.0f);
         
         projectileOrientation = (int)Random.Range(1, 5);
         Debug.Log(projectileOrientation);
