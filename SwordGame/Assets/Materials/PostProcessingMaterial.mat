@@ -65,7 +65,7 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DamageIntensity: 0
-    - _DeathIntensity: 0.69999987
+    - _DeathIntensity: 36.949955
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1

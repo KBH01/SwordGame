@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private uint health;
+    [SerializeField] private int health;
     [SerializeField] private Material postProcessingMaterial;
 
     [SerializeField] private Camera playerCam;
@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
             playerCam.gameObject.GetComponent<Rigidbody>().useGravity = true;
             sword.GetComponent<SwordScript>().enabled = false;
             sword.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            GetComponent<BoxCollider>().enabled = false;
         }
     }
     
