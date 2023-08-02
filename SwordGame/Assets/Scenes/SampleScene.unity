@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -156,9 +156,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2277c57d14b3eb34e9e9d9f2166d2703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 3
   postProcessingMaterial: {fileID: 2100000, guid: 44828ad824eb643418e1c6379a2476ca, type: 2}
+  playerCam: {fileID: 963194227}
+  sword: {fileID: 1412929582}
   damageIntensity: 0
+  deathIntensity: 0
 --- !u!65 &11547878
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -187,7 +190,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11547876}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -584,7 +587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 515369107}
   - component: {fileID: 515369108}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SelectWheelRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -809,7 +812,7 @@ GameObject:
   m_Component:
   - component: {fileID: 684399397}
   - component: {fileID: 684399398}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SelectWheelBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,7 +997,9 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
-  m_Layer: 0
+  - component: {fileID: 963194230}
+  - component: {fileID: 963194231}
+  m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1092,6 +1097,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   postProcessingMaterial: {fileID: 2100000, guid: 44828ad824eb643418e1c6379a2476ca, type: 2}
+--- !u!54 &963194230
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &963194231
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1070412690
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,7 +1186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1248658434}
   - component: {fileID: 1248658435}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SelectWheelLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1302,6 +1355,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e2ca965bc81b1b8448f50ac75632eb17, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1412929596}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e2ca965bc81b1b8448f50ac75632eb17, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1412929600}
   m_SourcePrefab: {fileID: 100100000, guid: e2ca965bc81b1b8448f50ac75632eb17, type: 3}
 --- !u!1 &1412929582 stripped
 GameObject:
@@ -6268,6 +6324,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &1412929600
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412929582}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1488592044
 GameObject:
   m_ObjectHideFlags: 0
@@ -6280,7 +6363,7 @@ GameObject:
   - component: {fileID: 1488592047}
   - component: {fileID: 1488592046}
   - component: {fileID: 1488592045}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6415,7 +6498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1832031454}
   - component: {fileID: 1832031455}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SelectWheelTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6586,7 +6669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Projectile: {fileID: 835993973}
-  spawnFrequency: 0.4
+  spawnFrequency: 0.6
 --- !u!1 &2127862481
 GameObject:
   m_ObjectHideFlags: 0

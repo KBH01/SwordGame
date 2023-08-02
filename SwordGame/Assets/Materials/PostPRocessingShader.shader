@@ -7,6 +7,7 @@ Shader "Hidden/PostPRocessingShader"
         _AbsorbTint ("AbsorbTint", Color) = (0, 0, 1, 1)
         _DamageIntensity ("DamageIntensity", float) = 0
         _AbsorbIntensity ("AbsorbIntensity", float) = 0
+        _DeathIntensity("DeathIntensity", float) = 0
     }
     SubShader
     {
@@ -44,6 +45,7 @@ Shader "Hidden/PostPRocessingShader"
             sampler2D _MainTex;
             float _DamageIntensity;
             float _AbsorbIntensity;
+            float _DeathIntensity;
             fixed4 _DamageTint;
             fixed4 _AbsorbTint;
 
@@ -58,9 +60,11 @@ Shader "Hidden/PostPRocessingShader"
             {
                 i.uv *= (_AbsorbIntensity * 0.01) + 1;
                 i.uv *= (-_DamageIntensity * 0.02) + 1;
+                i.uv *= _DeathIntensity * 0.1 * (Random(_Time.x * i.uv)) + 1;
                 fixed4 col = tex2D(_MainTex, (i.uv + (Random(i.uv.x * (_Time.x * 2) * i.uv.y) * _DamageIntensity * 0.01)));
                 col += _DamageTint * _DamageIntensity * 2;
                 col += _AbsorbTint * _AbsorbIntensity * 2;
+                col += _DamageTint * _DeathIntensity * 2;
                 return col;
             }
             ENDCG
