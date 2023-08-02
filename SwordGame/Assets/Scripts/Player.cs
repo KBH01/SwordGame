@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -12,11 +13,15 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject sword;
 
     [SerializeField] private AudioClip deathSound;
+
+    [SerializeField] private GameObject healthPoint;
+    [SerializeField] private GameObject healthPoint1;
+    [SerializeField] private GameObject healthPoint2;
     
     public float damageIntensity;
     public float deathIntensity = 0;
-        
-    
+
+
     private AudioSource playerAudio;
 
     void Awake()
@@ -35,10 +40,16 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             deathIntensity += 0.025f;
+            deathIntensity = Mathf.Clamp(deathIntensity, 0, 17);
             playerCam.gameObject.GetComponent<Rigidbody>().useGravity = true;
             sword.GetComponent<SwordScript>().enabled = false;
             sword.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             GetComponent<BoxCollider>().enabled = false;
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene("SampleScene");
+            }
         }
     }
     
@@ -47,6 +58,19 @@ public class Player : MonoBehaviour
         health -= 1;
         damageIntensity = 1;
         playerAudio.Play();
+
+        switch (health)
+        {
+            case 2:
+                Destroy(healthPoint);
+                break;
+            case 1:
+                Destroy(healthPoint1);
+                break;
+            case 0:
+                Destroy(healthPoint2);
+                break;
+        }
 
         if (health == 0)
         {
