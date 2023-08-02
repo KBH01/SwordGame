@@ -9,4 +9,9 @@ public class PlayButton : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
+
+    public static void Quit()
+    {
+        Application.Quit();
+    }
 }

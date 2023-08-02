@@ -7182,7 +7182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Projectile: {fileID: 835993973}
-  spawnFrequency: 0.4
+  spawnFrequency: 0.5
 --- !u!1 &2127862481
 GameObject:
   m_ObjectHideFlags: 0

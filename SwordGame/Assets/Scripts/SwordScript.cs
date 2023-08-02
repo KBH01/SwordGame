@@ -50,7 +50,7 @@ public class SwordScript : MonoBehaviour
 
     private ParticleSystem blockAffect;
 
-    public uint score;
+    public static uint score = 0;
 
     private AudioSource swordAudio;
     
@@ -65,7 +65,12 @@ public class SwordScript : MonoBehaviour
         blockAffect = GetComponent<ParticleSystem>();
         swordAudio = GetComponent<AudioSource>();
     }
-    
+
+    private void OnEnable()
+    {
+        score = 0;
+    }
+
     void Update()
     {
         lerpAmount += changeSpeed * Time.deltaTime;

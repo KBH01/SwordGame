@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
 
     private AudioSource playerAudio;
+    
+    public float scoreSceneTimer = 0;
 
     void Awake()
     {
@@ -39,16 +41,16 @@ public class Player : MonoBehaviour
 
         if (health <= 0)
         {
+            scoreSceneTimer += 1 * Time.deltaTime;
             deathIntensity += 0.025f;
             deathIntensity = Mathf.Clamp(deathIntensity, 0, 17);
             playerCam.gameObject.GetComponent<Rigidbody>().useGravity = true;
             sword.GetComponent<SwordScript>().enabled = false;
             sword.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             GetComponent<BoxCollider>().enabled = false;
-
-            if (Input.GetKeyDown(KeyCode.R))
+            if (scoreSceneTimer > 5)
             {
-                SceneManager.LoadScene("SampleScene");
+                SceneManager.LoadScene("Score");
             }
         }
     }
