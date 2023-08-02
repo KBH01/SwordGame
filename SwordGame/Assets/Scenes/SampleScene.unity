@@ -160,6 +160,7 @@ MonoBehaviour:
   postProcessingMaterial: {fileID: 2100000, guid: 44828ad824eb643418e1c6379a2476ca, type: 2}
   playerCam: {fileID: 963194227}
   sword: {fileID: 1412929582}
+  deathSound: {fileID: 8300000, guid: 3130b2604b3e1bb4b8894680a969efd7, type: 3}
   damageIntensity: 0
   deathIntensity: 0
 --- !u!65 &11547878
@@ -6668,7 +6669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Projectile: {fileID: 835993973}
-  spawnFrequency: 0.6
+  spawnFrequency: 0.4
 --- !u!1 &2127862481
 GameObject:
   m_ObjectHideFlags: 0

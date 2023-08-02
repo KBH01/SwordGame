@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Camera playerCam;
     [SerializeField] private GameObject sword;
+
+    [SerializeField] private AudioClip deathSound;
     
     public float damageIntensity;
     public float deathIntensity = 0;
@@ -21,7 +23,6 @@ public class Player : MonoBehaviour
     {
         playerAudio = GetComponent<AudioSource>();
         playerCam.gameObject.GetComponent<Rigidbody>().excludeLayers = LayerMask.GetMask("Default");
-
     }
 
     void Update()
@@ -46,5 +47,10 @@ public class Player : MonoBehaviour
         health -= 1;
         damageIntensity = 1;
         playerAudio.Play();
+
+        if (health == 0)
+        {
+            playerAudio.PlayOneShot(deathSound, 2f);
+        }
     }
 }
