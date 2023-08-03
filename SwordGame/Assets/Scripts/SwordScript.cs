@@ -199,7 +199,7 @@ public class SwordScript : MonoBehaviour
         {
             absorbIntensity = 1;
             blockAffect.Play();
-            if (GameObject.Find("Player").GetComponent<Player>().health >= 0)
+            if (GameObject.Find("Player").GetComponent<Player>().health > 0)
             {
                 score += 1;
             }
