@@ -199,7 +199,10 @@ public class SwordScript : MonoBehaviour
         {
             absorbIntensity = 1;
             blockAffect.Play();
-            score += 1;
+            if (GameObject.Find("Player").GetComponent<Player>().health >= 0)
+            {
+                score += 1;
+            }
             swordAudio.Play();
         }
     }

@@ -59,7 +59,7 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (projectileOrientation == swordScript.swordOrientation)
+        if (projectileOrientation == swordScript.swordOrientation && other.gameObject.name == "TriangleSword")
         {
             Destroy(gameObject);
         }
