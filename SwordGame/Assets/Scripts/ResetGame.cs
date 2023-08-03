@@ -12,7 +12,7 @@ public class ResetGame : MonoBehaviour
     {
         scoreText.text = SwordScript.score.ToString();
         
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.anyKeyDown)
         {
             SceneManager.LoadScene("Lobby");
         }

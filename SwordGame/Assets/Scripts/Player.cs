@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
             sword.GetComponent<SwordScript>().enabled = false;
             sword.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             GetComponent<BoxCollider>().enabled = false;
-            if (scoreSceneTimer > 5)
+            if (scoreSceneTimer > 4)
             {
                 SceneManager.LoadScene("Score");
             }
